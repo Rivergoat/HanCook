@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace HanCook
 {
-    class Program
+    class Hide
     {
-        static void Main(string[] args)
-        {
-            //just testing some shit
-        }
     }
 }
