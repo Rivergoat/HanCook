@@ -19,16 +19,16 @@ namespace HanCook
         };
 
 
-        public static int[] FindInMap(char letter)
+        public static int[] FindInMap(char letter) //This function is used to find a specific character in our map
         {
-            int[] Data = new int[2];
+            int[] Data = new int[2];    // Declaring a new Array with the length of two, one for
             for (int y = 0; y < 5; y++)
             {
                 for (int x = 0; x < 5; x++)
                 {
                     if (letter == HideMap[x, y])
                     {
-                        Data[0] = x + 1;
+                        Data[0] = x + 1;    
                         Data[1] = y + 1;
                     }
                 }
