@@ -37,7 +37,14 @@ namespace HanCook
         }
         public static int[,] FindString(string ToFind)
         {
-            int[,] Data = new int[ToFind.Length, 2];
+            int[,] Data = new int[ToFind.Length, 2];    //We init a new 2d array
+            /*******************************
+            * [X1, X2, X3, X4, X5, X6, X7]
+            * [Y1, Y2, Y3, Y4, X5, X6, X7]
+            *
+            * This is our format for parsing later on
+            * 
+            ********************************/
             for (int letter = 0; letter < ToFind.Length; letter++)
             {
                 for (int y = 0; y < 5; y++)
@@ -46,8 +53,6 @@ namespace HanCook
                     {
                         if (ToFind[letter] == HideMap[x, y])
                         {
-                            //Data[letter,0] = x + 1;
-                            //Data[letter,1] = y + 1;
                             Data[letter, 0] = x + 1;
                             Data[letter, 1] = y + 1;
                         }
