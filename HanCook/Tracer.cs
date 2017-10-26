@@ -22,7 +22,7 @@ namespace HanCook
         {
             this.Passphrase = Passphrase;
             this.Hash = C();
-            this.Coords = CoordMaker();
+            //this.Coords = CoordMaker();
         }
 
         private byte[] C()
@@ -32,15 +32,7 @@ namespace HanCook
             byte[] hash = sha.ComputeHash(inputBytes);
             return hash;
         }
-        private int[,] CoordMaker()
-        {
-            int
-            for (int i = 0; i < this.Hash.Length; i++)
-            {
-
-            }
-        }
-
+        
         private bool IsInList(Byte[,] list, byte[] ToTest)
         {
             bool status = false;
