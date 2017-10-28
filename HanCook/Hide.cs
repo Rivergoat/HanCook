@@ -29,7 +29,14 @@ namespace HanCook
          *                                                                              *
          ********************************************************************************/
          
-        //ToDo 
+        /****************************************
+         *		   The Golden			   *
+         *			TODOs			   *
+         *							   *
+         *   0. Seperation	into chunks	   *
+         *   1. Key Update non-backchaineable   *
+         ****************************************/
+
         public static Bitmap GenerateArtificialNoise(this Bitmap bmp, int density ,int strength = 6)
         {
             int y = 0;
@@ -41,7 +48,6 @@ namespace HanCook
             {
                 while (x < bmp.Width)
                 {
-
                     Color pixelcolor = bmp.GetPixel(x, y);
 
                     int nr = pixelcolor.R + change.Next(strength); int ng = pixelcolor.G + change.Next(strength); int nb = pixelcolor.B + change.Next(strength);
@@ -50,7 +56,6 @@ namespace HanCook
                     if (ng > 254) ng = 255;
                     if (nb > 254) nb = 255;
 
-                    //todo: get out of paratheses
                     Color newcolor = Color.FromArgb(nr,ng,nb);
                     x += step.Next(density);
                     bmp.SetPixel(x, y, newcolor);
@@ -59,13 +64,15 @@ namespace HanCook
             }
 
             return null;
-        } 
-        byte[] CalHash(string ToHash)
-        {
-            SHA1 sha = SHA1.Create();
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(ToHash);
-            byte[] hash = sha.ComputeHash(inputBytes);
-            return hash;
         }
+
+
+	   public static byte[] GenerateInitialCoordPair(string Passphrase)
+	   {
+		  SHA1 sha = SHA1.Create();
+		  byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(Passphrase);
+		  byte[] hash = sha.ComputeHash(inputBytes);
+		  return hash;
+	   } 
     }
 }
