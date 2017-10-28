@@ -15,5 +15,18 @@ namespace HanCook
             toround = toround - soos;
             return toround;
         }
+
+        private bool IsInList(Byte[,] list, byte[] ToTest)
+        {
+            bool status = false;
+            for (int x = 0; x < list.GetLength(0); x++)
+            {
+                if (list[x, 0].ToString() + list[x, 1].ToString() == ToTest[0].ToString() + ToTest[1].ToString())
+                {
+                    status = true;
+                }
+            }
+            return status;
+        }
     }
 }

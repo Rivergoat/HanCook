@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Security.Cryptography;
+using System.Drawing;
 
 
 namespace HanCook
 {
-    class Hide
+    public static class Hide
     {
         /********************************************************************************
          *                  How to write ImageMapping file                              *
@@ -27,6 +28,44 @@ namespace HanCook
          *      FIXME:  Save as png file                                                *      
          *                                                                              *
          ********************************************************************************/
+         
+        //ToDo 
+        public static Bitmap GenerateArtificialNoise(this Bitmap bmp, int density ,int strength = 6)
+        {
+            int y = 0;
+            int x = 0;
+            Random step = new Random();
+            Random change = new Random();
 
+            while (y < bmp.Height)
+            {
+                while (x < bmp.Width)
+                {
+
+                    Color pixelcolor = bmp.GetPixel(x, y);
+
+                    int nr = pixelcolor.R + change.Next(strength); int ng = pixelcolor.G + change.Next(strength); int nb = pixelcolor.B + change.Next(strength);
+
+                    if (nr > 254) nr = 255;
+                    if (ng > 254) ng = 255;
+                    if (nb > 254) nb = 255;
+
+                    //todo: get out of paratheses
+                    Color newcolor = Color.FromArgb(nr,ng,nb);
+                    x += step.Next(density);
+                    bmp.SetPixel(x, y, newcolor);
+                }
+                y++;
+            }
+
+            return null;
+        } 
+        byte[] CalHash(string ToHash)
+        {
+            SHA1 sha = SHA1.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(ToHash);
+            byte[] hash = sha.ComputeHash(inputBytes);
+            return hash;
+        }
     }
 }
