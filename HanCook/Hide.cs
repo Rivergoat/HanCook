@@ -11,7 +11,9 @@ namespace HanCook
 {
     public static class Hide
     {
-        /********************************************************************************
+        /*
+	    
+	    ********************************************************************************
          *                  How to write ImageMapping file                              *
          *      Two hashes are calculated, one for X values and one for Y               *
          *      *       *       *       *       *       *       *       *       *       *
@@ -27,16 +29,17 @@ namespace HanCook
          *      ALSO TODO:  Generate artificial Image noise                             *
          *      FIXME:  Save as png file                                                *      
          *                                                                              *
-         ********************************************************************************/
+         ********************************************************************************
          
-        /****************************************
-         *		   The Golden			   *
-         *			TODOs			   *
-         *							   *
+         ****************************************
+         *~	~	~   The Golden	  ~	  ~	  ~*
+         *			 TODOs			   *
+         *	===========================	   *
          *   0. Seperation	into chunks	   *
          *   1. Key Update non-backchaineable   *
-         ****************************************/
-
+         ****************************************
+	    
+	    */
         public static Bitmap GenerateArtificialNoise(this Bitmap bmp, int density ,int strength = 6)
         {
             int y = 0;
@@ -67,12 +70,46 @@ namespace HanCook
         }
 
 
-	   public static byte[] GenerateInitialCoordPair(string Passphrase)
+
+	   public static byte[,] GenerateInitialCoordPair(string Passphrase)
 	   {
+		  /****************************************************
+		   * Hash-algorithm is Secure Hash Algrotithm 1
+		   *				   (NSA)
+		   *				   
+		   *	Passphrase length minimum is 14 characters
+		   *	
+		   *	|0|1|2|3|4|5|6|7|8|9|	Passphrase is divided
+		   *	|T|e|s|t|T|e|s|t|F|i|	into two strings, each
+		   *	|   |   |   |   |   |	consisting of every
+		   *	|X|Y|X|Y|X|Y|X|Y|X|Y|	second char. (+1)
+		   *	
+		   * **************************************************/
+
+		  string X_Pass = null;
+		  string Y_Pass = null;
+
+		  for (int i = 0; i < Passphrase.Length; i += 2)	//seperate 
+		  {
+			 X_Pass += Passphrase[i];
+			 Y_Pass += Passphrase[i + 1];
+		  }
 		  SHA1 sha = SHA1.Create();
-		  byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(Passphrase);
-		  byte[] hash = sha.ComputeHash(inputBytes);
-		  return hash;
+
+		  byte[] inputBytes_X = System.Text.Encoding.ASCII.GetBytes(X_Pass);
+		  byte[] inputBytes_Y = System.Text.Encoding.ASCII.GetBytes(Y_Pass);
+
+		  byte[] X_Hash = sha.ComputeHash(inputBytes_X);
+		  byte[] Y_Hash = sha.ComputeHash(inputBytes_Y);
+
+		  byte[,] Returneable = new byte[X_Pass.Length, 2];
+		  for (int i = 0; i < X_Hash.Length; i += 2)
+		  {
+			 Returneable[i, 0] = X_Hash[i / 2];
+			 Returneable[i, 1] = Y_Hash[i / 2];
+		  }
+
+		  return Returneable;
 	   } 
     }
 }
