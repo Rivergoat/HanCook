@@ -27,7 +27,7 @@ namespace HanCook
          *      look up how many letters go in each quadrant. Seperate this             *
          *                                                                              *
          *      ALSO TODO:  Generate artificial Image noise                             *
-         *      FIXME:  Save as png file                                                *      
+         *      FIXME:  Save as png file                                                *
          *                                                                              *
          ********************************************************************************
          
@@ -69,7 +69,29 @@ namespace HanCook
             return null;
         }
 
+	   public static Bitmap GenerateNoise(this Bitmap bmp, int density, int strength=6)
+	   {
+		  strength = ((bmp.Width * bmp.Height) / 255) * strength;
+		  Random change = new Random();
+		  Random X_Value = new Random(64);
+		  Random y_value = new Random(256);
 
+		  for (int i = 0; i < strength; i++)
+		  {
+			 Color pixelcolor = bmp.GetPixel(x, y);
+
+			 int nr = pixelcolor.R + change.Next(strength); int ng = pixelcolor.G + change.Next(strength); int nb = pixelcolor.B + change.Next(strength);
+
+			 if (nr > 254) nr = 255;
+			 if (ng > 254) ng = 255;
+			 if (nb > 254) nb = 255;
+
+			 Color newcolor = Color.FromArgb(nr, ng, nb);
+			 bmp.SetPixel(X_Value.Next(19), y_value.Next(15),newcolor);
+
+		  }
+		  return null;
+	   }
 
 	   public static byte[,] GenerateInitialCoordPair(string Passphrase)
 	   {
@@ -110,6 +132,7 @@ namespace HanCook
 		  }
 
 		  return Returneable;
-	   } 
+	   }
+	   
     }
 }
