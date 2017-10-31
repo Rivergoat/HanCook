@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coord.cs" />
     <Compile Include="Hide.cs" />
     <Compile Include="Mapper.cs" />
     <Compile Include="Program.cs" />
