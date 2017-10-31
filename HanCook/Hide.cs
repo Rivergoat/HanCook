@@ -11,8 +11,10 @@ namespace HanCook
 {
     public class Coord
     {
-	   public Byte[] X { get; set; }
-	   public Byte[] Y { get; set; }
+	   public Byte[] X { get;private set; }
+	   public Byte[] Y { get;private set; }
+
+	   private int[] RMlist = null;
 
 	   public Coord()
 	   {
@@ -20,13 +22,10 @@ namespace HanCook
 		  this.Y = Y;
 	   }
 
-	   public void AddRemove(int index /*call rm() next*/)	// We arent in C, so no dynamic memory access
+	   public void AddToRemove(int index /*call rm() next*/)	// We arent in C, so no dynamic memory access
 	   {
 		  this.X[index] = 0;
 		  this.Y[index] = 0;
-		  this.
-		  
-		  }
 	   }
 	   
     }
@@ -95,11 +94,14 @@ namespace HanCook
 		  strength = ((bmp.Width * bmp.Height) / 255) * strength;
 		  Random change = new Random();
 		  Random X_Value = new Random(64);
-		  Random y_value = new Random(256);
+		  Random Y_value = new Random(256);
 
+		  int xx = X_Value.Next(256);
+		  int yy = Y_value.Next(128);
+		  
 		  for (int i = 0; i < strength; i++)
 		  {
-			 Color pixelcolor = bmp.GetPixel(x, y);
+			 Color pixelcolor = bmp.GetPixel(xx, yy);
 
 			 int nr = pixelcolor.R + change.Next(strength); int ng = pixelcolor.G + change.Next(strength); int nb = pixelcolor.B + change.Next(strength);
 
@@ -108,7 +110,7 @@ namespace HanCook
 			 if (nb > 254) nb = 255;
 
 			 Color newcolor = Color.FromArgb(nr, ng, nb);
-			 bmp.SetPixel(X_Value.Next(19), y_value.Next(15),newcolor);
+			 bmp.SetPixel(xx,yy,newcolor);
 
 		  }
 		  return null;
@@ -155,6 +157,6 @@ namespace HanCook
 		  return Returneable;
 	   }
 	   
-	   public static 
+	   
     }
 }
