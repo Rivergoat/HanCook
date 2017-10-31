@@ -136,7 +136,11 @@ namespace HanCook
 
 		  return Returneable;
 	   }
-	   
+
+	   public static void LuckHideSmall(this Bitmap bmp, string Message, string HashKey)
+	   {
+		  
+	   }
 	   
     }
 }
