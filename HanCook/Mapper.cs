@@ -19,7 +19,7 @@ namespace HanCook
             {'u','v','w','y','z'}
         };
 
-
+	   
         public static int[] FindInMap(char letter) //This function is used to find a specific character in our map
         {
             int[] Data = new int[2];    // Declaring a new Array with the length of two, one for

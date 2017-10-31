@@ -9,6 +9,27 @@ using System.Drawing;
 
 namespace HanCook
 {
+    public class Coord
+    {
+	   public Byte[] X { get; set; }
+	   public Byte[] Y { get; set; }
+
+	   public Coord()
+	   {
+		  this.X = X;
+		  this.Y = Y;
+	   }
+
+	   public void AddRemove(int index /*call rm() next*/)	// We arent in C, so no dynamic memory access
+	   {
+		  this.X[index] = 0;
+		  this.Y[index] = 0;
+		  this.
+		  
+		  }
+	   }
+	   
+    }
     public static class Hide
     {
         /*
@@ -134,5 +155,6 @@ namespace HanCook
 		  return Returneable;
 	   }
 	   
+	   public static 
     }
 }

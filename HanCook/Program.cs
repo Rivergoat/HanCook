@@ -21,6 +21,8 @@ namespace HanCook
             }
             return status;
         }
+	   Coord test = new Coord();
+	   testc.
         static void Main(string[] args)
         {
             SHA1 sha = SHA1.Create();
