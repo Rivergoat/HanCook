@@ -11,6 +11,7 @@ namespace HanCook
 {
     public static class Hide
     {
+	   
         /*
 	    
 	    ********************************************************************************
@@ -128,6 +129,7 @@ namespace HanCook
 		  byte[] Y_Hash = sha.ComputeHash(inputBytes_Y);
 
 		  byte[,] Returneable = new byte[X_Pass.Length, 2];
+
 		  for (int i = 0; i < X_Hash.Length; i += 2)
 		  {
 			 Returneable[i, 0] = X_Hash[i / 2];
@@ -136,10 +138,17 @@ namespace HanCook
 
 		  return Returneable;
 	   }
-
-	   public static void LuckHideSmall(this Bitmap bmp, string Message, string HashKey)
+	   
+	   // The function below is shit.
+	   public static void LuckHideSmall(this Bitmap bmp, string Message, string Pass)
 	   {
-		  
+		  byte[,] Coords = Hide.GenerateInitialCoordPair(Pass);
+
+		  while (Coords.Length<Message.Length*2) //to have some buffer
+		  {
+
+		  }
+		  bmp.HideCharacter()
 	   }
 	   
     }
