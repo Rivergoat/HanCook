@@ -140,16 +140,35 @@ namespace HanCook
 	   }
 	   
 	   // The function below is shit.
-	   public static void LuckHideSmall(this Bitmap bmp, string Message, string Pass)
+	   public static void LuckHideSmall(this Bitmap bmp, string Message, string Passphrase)
 	   {
-		  byte[,] Coords = Hide.GenerateInitialCoordPair(Pass);
+		  byte[] X = new byte[Message.Length*20];
+		  byte[] Y = new byte[Message.Length*20];
 
-		  while (Coords.Length<Message.Length*2) //to have some buffer
+		  string X_Pass = null;
+		  string Y_Pass = null;
+
+		  for (int i = 0; i < Passphrase.Length; i += 2)  //seperate 
 		  {
-
+			 X_Pass += Passphrase[i];
+			 Y_Pass += Passphrase[i + 1];
 		  }
-		  bmp.HideCharacter()
+
+		  SHA1 sha = SHA1.Create();
+
+		  byte[] inputBytes_X = System.Text.Encoding.ASCII.GetBytes(X_Pass);
+		  byte[] inputBytes_Y = System.Text.Encoding.ASCII.GetBytes(Y_Pass);
+
+		  byte[] X_Hash = sha.ComputeHash(inputBytes_X);
+		  byte[] Y_Hash = sha.ComputeHash(inputBytes_Y);
+
+		  for (int chunks = 0; chunks < Message.Length*20; chunks+=20)
+		  {
+			 for (int elements = chunks; elements < chunks+20; elements++)
+			 {
+				
+			 }
+		  }
 	   }
-	   
     }
 }
